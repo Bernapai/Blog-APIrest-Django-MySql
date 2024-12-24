@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.views import View
 from .models import Usuario, Post, Comentario
+from .serializers import UsuarioSerializer, PostSerializer, ComentarioSerializer
 
 # Create your views here.
 class UsuarioView (View) :
