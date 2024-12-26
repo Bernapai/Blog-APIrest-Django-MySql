@@ -1,58 +1,35 @@
-from django.shortcuts import render
-from django.views import View
+from rest_framework import generics
 from .models import Usuario, Post, Comentario
 from .serializers import UsuarioSerializer, PostSerializer, ComentarioSerializer
 
-# Create your views here.
-class UsuarioView (View) :
+# Vista para listar y crear usuarios
+class UsuarioListCreateView(generics.ListCreateAPIView):
+    queryset = Usuario.objects.all() 
+    serializer_class = UsuarioSerializer  
+# Vista para obtener, actualizar y eliminar usuarios
+class UsuarioRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Usuario.objects.all()  
+    serializer_class = UsuarioSerializer
 
-    def get (self, request, id_usuario = 0):
-        if id_usuario > 0:
-            usuario = Usuario.objects.get(id=id_usuario)
-        else:
-            usuarios = Usuario.objects.all()
+# Vista para listar y crear posts
+class PostListCreateView(generics.ListCreateAPIView):
+    queryset = Post.objects.all()  
+    serializer_class = PostSerializer  
 
-    
-    def post (self, request):
-        pass
+# Vista para obtener, actualizar y eliminar posts
+class PostRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Post.objects.all()  
+    serializer_class = PostSerializer 
 
-    def delete (self, request):
-        pass
+# Vista para listar y crear comentarios
+class ComentarioListCreateView(generics.ListCreateAPIView):
+    queryset = Comentario.objects.all() 
+    serializer_class = ComentarioSerializer 
 
-    def put (self, request):
-        pass
+# Vista para obtener, actualizar y eliminar comentarios
+class ComentarioRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Comentario.objects.all()  
+    serializer_class = ComentarioSerializer 
 
-
-    
-class PostView (View) :
-
-    def get (self, request, ):
-        posts = Post.objects.all()
-
-    
-    def post (self, request):
-        pass
-
-    def delete (self, request):
-        pass
-
-    def put (self, request):
-        pass
-
-
-class ComentarioView (View) :
-
-    def get (self, request):
-        comentarios = Comentario.objects.all()
-
-    
-    def post (self, request):
-        pass
-
-    def delete (self, request):
-        pass
-
-    def put (self, request):
-        pass
 
     
