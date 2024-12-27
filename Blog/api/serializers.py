@@ -1,12 +1,15 @@
-from .models import Usuario, Post, Comentario
+from .models import  Post, Comentario
 from rest_framework import serializers
+from django.contrib.auth.models import User
 
 
 
-class UsuarioSerializer(serializers.ModelSerializer):
+
+class UserSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Usuario
-        fields = '__all__'
+        model = User
+        fields = ['id', 'username', 'email']
+
 
 class PostSerializer(serializers.ModelSerializer):
     class Meta:
