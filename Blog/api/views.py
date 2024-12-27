@@ -4,6 +4,7 @@ from .serializers import  PostSerializer, ComentarioSerializer,UserSerializer
 from django.contrib.auth.models import User
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework.permissions import IsAuthenticated
+from .owner import IsOwner
 
 
 
@@ -21,25 +22,25 @@ class UserRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
 class PostListCreateView(generics.ListCreateAPIView):
     queryset = Post.objects.all()  
     serializer_class = PostSerializer 
-    permission_classes = [IsAuthenticated] 
+    permission_classes = [IsAuthenticated ] 
 
 # Vista para obtener, actualizar y eliminar posts
 class PostRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Post.objects.all()  
     serializer_class = PostSerializer 
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, IsOwner]
 
 # Vista para listar y crear comentarios
 class ComentarioListCreateView(generics.ListCreateAPIView):
     queryset = Comentario.objects.all() 
     serializer_class = ComentarioSerializer 
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated ]
 
 # Vista para obtener, actualizar y eliminar comentarios
 class ComentarioRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Comentario.objects.all()  
     serializer_class = ComentarioSerializer 
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, IsOwner]
 
 # Vista para login de usuarios
 class LoginView(TokenObtainPairView):

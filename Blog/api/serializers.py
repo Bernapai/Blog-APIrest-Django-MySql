@@ -16,8 +16,21 @@ class PostSerializer(serializers.ModelSerializer):
         model = Post
         fields = '__all__'
 
+    def validate_titulo(self, value):
+        if not value:
+            raise serializers.ValidationError("El título no puede estar vacío.")
+        if len(value) > 50:
+            raise serializers.ValidationError("El título no puede exceder los 50 caracteres.")
+        return value
+
+
 class ComentarioSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comentario
         fields = '__all__'
+
+      def validate_contenido(self, value):
+        if not value:
+            raise serializers.ValidationError("El contenido del comentario no puede estar vacío.")
+        return value
 
